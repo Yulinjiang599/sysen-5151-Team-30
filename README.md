@@ -4,10 +4,11 @@ Cornell University
 SYSEN 5151 - Foundations of Systems Engineering
 
 ## Team Members
+- Ming Gong
+- Sean Hang
+- Ruixin Hu
+- Yifei Hua
 - Julian Jiang
-- Member 2
-- Member 3
-- Member 4
 
 ## Project
 TBD
