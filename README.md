@@ -6,7 +6,7 @@ SYSEN 5151 - Foundations of Systems Engineering
 ## Team Members
 - Ming Gong
 - Sean Hang
-- Ruixin Hu
+- Xinrui Hu
 - Yifei Hua
 - Julian Jiang
 
