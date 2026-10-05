@@ -9,6 +9,7 @@ SYSEN 5151 - Foundations of Systems Engineering
 - Xinrui Hu
 - Yifei Hua
 - Julian Jiang
+- Yilin Zhao
 
 ## Project
 TBD
