@@ -1,5 +1,7 @@
 # StudyFlow — SPEC.md
 
+> Implementation companion (2026-11-05): this file retains the original requirement statements and proposed contracts as a historical draft. The actual supplied 3.0 field names, policy and module/test links are documented in [traceability](../docs/traceability.md), [ICOM](../docs/icom-signatures.md), [route table](../docs/route-table.md) and [local interface contract](../contracts/api-v1.yaml). Historical “implementation pending” statements below describe the original review, not the current codebase. No student-pilot or full privacy-acceptance result is asserted by this implementation update.
+
 - Team: SYSEN 5151 Project Team 30
 - Version: 0.1 (draft for team review)
 - Prepared: 2026-10-05

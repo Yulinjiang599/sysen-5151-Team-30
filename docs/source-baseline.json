@@ -1,0 +1,8 @@
+{
+  "repository_base_commit": "164b51af92dda3c6489e6e0238a167d98746cea1",
+  "uploaded_demo_filename": "studyflow_demo 3.0.html",
+  "uploaded_demo_sha256": "602fc442afaa50fe51a8b269a2dcb444b78c39dc1727959f12efa02526d50474",
+  "model_source": "Team Google Doc Chapter 8\u20139 and relationship exports reviewed in this conversation on 2026-10-30",
+  "model_document": "https://docs.google.com/document/d/1g_xE67P1cuqlw-m7l0tHZ-2sPa6xyJcMPPvPnlq-N5Q/edit?tab=t.sp76pwaocs5q",
+  "note": "The dated XML exports in the repository are historical snapshots; they do not establish the current Chapter 9 architecture. No live model changes are made by this codebase."
+}

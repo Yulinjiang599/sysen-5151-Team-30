@@ -1,0 +1,535 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "StudyFlow local interface contract",
+    "version": "1.0.0",
+    "description": "Standalone browser MVP. No HTTP server API is implemented. paths is intentionally empty. x-local-operations documents the actual JavaScript functions; Date objects serialize to ISO timestamps. JSON notation is used as valid YAML for dependency-free checks."
+  },
+  "paths": {},
+  "x-transport": "in-process JavaScript, not HTTP",
+  "x-local-operations": [
+    {
+      "operationId": "calculateTaskPriorities",
+      "module": "Study Flow/js/planning.js",
+      "functionId": "F.1.4",
+      "parameters": [
+        "tasks",
+        "now"
+      ],
+      "returns": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/RankedTask"
+        }
+      },
+      "errors": "Throws TypeError for invalid inputs or Error for invalid assessed proposals; no HTTP status codes."
+    },
+    {
+      "operationId": "identifySchedulingConstraints",
+      "module": "Study Flow/js/planning.js",
+      "functionId": "F.1.5.1",
+      "parameters": [
+        "profile",
+        "controls"
+      ],
+      "returns": {
+        "$ref": "#/components/schemas/Constraints"
+      },
+      "errors": "Throws TypeError for invalid inputs or Error for invalid assessed proposals; no HTTP status codes."
+    },
+    {
+      "operationId": "determineAvailableStudySlots",
+      "module": "Study Flow/js/planning.js",
+      "functionId": "F.1.5.2",
+      "parameters": [
+        "constraints"
+      ],
+      "returns": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Slot"
+        }
+      },
+      "errors": "Throws TypeError for invalid inputs or Error for invalid assessed proposals; no HTTP status codes."
+    },
+    {
+      "operationId": "allocatePrioritizedTasks",
+      "module": "Study Flow/js/planning.js",
+      "functionId": "F.1.5.3",
+      "parameters": [
+        "prioritizedTasks",
+        "availableSlots",
+        "constraints"
+      ],
+      "returns": {
+        "$ref": "#/components/schemas/Plan"
+      },
+      "errors": "Throws TypeError for invalid inputs or Error for invalid assessed proposals; no HTTP status codes."
+    },
+    {
+      "operationId": "evaluateScheduleFeasibility",
+      "module": "Study Flow/js/planning.js",
+      "functionId": "F.1.5.4",
+      "parameters": [
+        "proposal",
+        "constraints",
+        "availableSlots"
+      ],
+      "returns": {
+        "$ref": "#/components/schemas/Assessment"
+      },
+      "errors": "Throws TypeError for invalid inputs or Error for invalid assessed proposals; no HTTP status codes."
+    },
+    {
+      "operationId": "assembleStudyPlan",
+      "module": "Study Flow/js/planning.js",
+      "functionId": "F.1.5.5",
+      "parameters": [
+        "proposal",
+        "assessment"
+      ],
+      "returns": {
+        "$ref": "#/components/schemas/Plan"
+      },
+      "errors": "Throws TypeError for invalid inputs or Error for invalid assessed proposals; no HTTP status codes."
+    },
+    {
+      "operationId": "generateFeasibleStudyPlan",
+      "module": "Study Flow/js/planning.js",
+      "functionId": "F.1.5",
+      "parameters": [
+        "profile",
+        "controls"
+      ],
+      "returns": {
+        "$ref": "#/components/schemas/Plan"
+      },
+      "errors": "Throws TypeError for invalid inputs or Error for invalid assessed proposals; no HTTP status codes."
+    },
+    {
+      "operationId": "loadState",
+      "module": "Study Flow/js/storage.js",
+      "functionId": "F.1.1",
+      "parameters": [
+        "storage",
+        "fallback",
+        "migrate"
+      ],
+      "returns": {
+        "$ref": "#/components/schemas/State"
+      },
+      "description": "On missing/malformed saved state, returns caller fallback via migration."
+    },
+    {
+      "operationId": "saveState",
+      "module": "Study Flow/js/storage.js",
+      "functionId": "F.1.6",
+      "parameters": [
+        "storage",
+        "state"
+      ],
+      "returns": {
+        "$ref": "#/components/schemas/State"
+      },
+      "description": "Persists JSON using supplied Storage; propagates write errors."
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Task": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "deadline",
+          "minutes",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "deadline": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "minutes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "completed": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "todo",
+              "progress",
+              "done"
+            ]
+          },
+          "importance": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4
+          },
+          "energy": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ]
+          },
+          "difficulty": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4
+          }
+        }
+      },
+      "Window": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 2,
+        "items": {
+          "type": "string",
+          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+        },
+        "description": "Local start/end HH:mm; start precedes end."
+      },
+      "Commitment": {
+        "type": "object",
+        "required": [
+          "start",
+          "end"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "start": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "Profile": {
+        "type": "object",
+        "required": [
+          "tasks",
+          "availability"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Task"
+            }
+          },
+          "availability": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Window"
+              }
+            },
+            "description": "Weekday keys 0 (Sunday) through 6; missing days mean empty arrays."
+          },
+          "commitments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Commitment"
+            }
+          }
+        }
+      },
+      "Controls": {
+        "type": "object",
+        "properties": {
+          "now": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "horizonDays": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 31,
+            "default": 7
+          },
+          "maxSessionMinutes": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 90
+          },
+          "extraMinutes": {
+            "type": "integer",
+            "enum": [
+              0,
+              30,
+              60
+            ],
+            "default": 0
+          }
+        },
+        "description": "No external storage/network; explicit now makes results repeatable."
+      },
+      "Slot": {
+        "type": "object",
+        "required": [
+          "start",
+          "end"
+        ],
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "RankedTask": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Task"
+          },
+          {
+            "type": "object",
+            "required": [
+              "remaining",
+              "score"
+            ],
+            "properties": {
+              "remaining": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "score": {
+                "type": "number"
+              }
+            }
+          }
+        ]
+      },
+      "Block": {
+        "type": "object",
+        "required": [
+          "taskId",
+          "name",
+          "start",
+          "end",
+          "duration",
+          "status"
+        ],
+        "properties": {
+          "taskId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "start": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "duration": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "todo",
+              "progress",
+              "done"
+            ]
+          }
+        }
+      },
+      "Shortfall": {
+        "type": "object",
+        "required": [
+          "taskId",
+          "name",
+          "minutes"
+        ],
+        "properties": {
+          "taskId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "minutes": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "Plan": {
+        "type": "object",
+        "required": [
+          "blocks",
+          "shortfalls"
+        ],
+        "properties": {
+          "blocks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Block"
+            }
+          },
+          "shortfalls": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Shortfall"
+            }
+          }
+        }
+      },
+      "Assessment": {
+        "type": "object",
+        "required": [
+          "valid",
+          "feasible",
+          "issues",
+          "unscheduledMinutes"
+        ],
+        "properties": {
+          "valid": {
+            "type": "boolean"
+          },
+          "feasible": {
+            "type": "boolean"
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "unscheduledMinutes": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "Constraints": {
+        "type": "object",
+        "required": [
+          "tasks",
+          "availability",
+          "commitments",
+          "now",
+          "horizonEnd",
+          "horizonDays",
+          "maxSessionMinutes",
+          "extraMinutes",
+          "ruleVersion"
+        ],
+        "properties": {
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Task"
+            }
+          },
+          "availability": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Window"
+              }
+            }
+          },
+          "commitments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Commitment"
+            }
+          },
+          "now": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "horizonEnd": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "horizonDays": {
+            "type": "integer"
+          },
+          "maxSessionMinutes": {
+            "type": "integer"
+          },
+          "extraMinutes": {
+            "type": "integer"
+          },
+          "ruleVersion": {
+            "type": "string"
+          }
+        }
+      },
+      "State": {
+        "type": "object",
+        "required": [
+          "version",
+          "active",
+          "users"
+        ],
+        "properties": {
+          "version": {
+            "type": "integer",
+            "enum": [
+              4
+            ]
+          },
+          "active": {
+            "type": "string"
+          },
+          "tourSeen": {
+            "type": "boolean"
+          },
+          "users": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Profile"
+            }
+          },
+          "timer": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      }
+    }
+  }
+}
