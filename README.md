@@ -165,56 +165,50 @@ The current Innoslate model contains the stakeholder needs, stakeholder requirem
 ## 7. Repository Structure
 
 ```text
-sysen-5151-Team-30/
-│
-├── README.md
-│
-└── Study Flow/
-    │
-    ├── SPEC.md
-    │   └── Needs, requirements, MOEs, acceptance criteria,
-    │       data contracts, and verification planning
-    │
-    ├── studyflow_demo.html
-    │   └── Interactive StudyFlow walking-skeleton demo
-    │
-    └── Innoslate log/
-        ├── SysEn 5151 Project Team 30-Sep 18.xml
-        └── SysEn 5151 Project Team 30-Oct 5.xml
-            └── Innoslate MBSE model exports
+Study Flow/
+  studyflow_demo.html       Browser entry, based on supplied demo 3.0
+  js/planning.js           F.1.3/F.1.4 and five F.1.5 component functions
+  js/storage.js            Injected browser-storage adapter
+  js/app.js                UI and input/replanning handlers
+  SPEC.md                  Historical source-aligned requirements draft
+  Innoslate log/           Historical model exports, retained unchanged
+docs/
+  traceability.md          Function → requirements → code → tests
+  traceability.json        Machine-readable function mapping
+  icom-signatures.md       Model arrows and actual function parameters
+  route-table.md           Browser interactions; no implemented HTTP API
+  recording-guide-E.md     Three-minute Codebase-to-Model recording sequence
+  verification.md          Reproduction steps and evidence boundaries
+  source-baseline.json     Source filename/digest and reviewed model baseline
+contracts/api-v1.yaml      Local interfaces and schemas; HTTP paths empty
+tests/                    Requirement-named Python runner and real JS assertions
+scripts/                  Link/contract checker and portable HTML builder
+.github/workflows/        GitHub Actions verification
 ```
 
-Historical Innoslate exports are retained to document the evolution of the MBSE model.
+## 8. Running and Checking the Current Demo
 
----
+Open `Study Flow/studyflow_demo.html` in a desktop browser, keeping its adjacent `js/` directory. There is no application build step and no backend service. Alex and Maya are local demonstration profiles, not authenticated accounts. Core planning works without LMS, external Calendar or LLM services; optional web fonts use the browser's system-font fallback when offline.
 
-## 8. Running the Current Demo
+For a stable local origin while recording:
 
-The current walking skeleton is implemented as a standalone HTML application.
-
-### Option 1 — Open directly
-
-Navigate to:
-
-```text
-Study Flow/studyflow_demo.html
+```sh
+python3 -m http.server 8000 --directory 'Study Flow'
 ```
 
-and open the file in a modern web browser such as Google Chrome.
+Open `http://localhost:8000/studyflow_demo.html`. The server provides static files only.
 
-### Option 2 — From macOS Terminal
+Developer checks require Node.js 22+ and Python 3.12+; they use no npm/pip dependencies:
 
-After cloning the repository:
-
-```bash
-git clone https://github.com/Yulinjiang599/sysen-5151-Team-30.git
-cd sysen-5151-Team-30
-open "Study Flow/studyflow_demo.html"
+```sh
+python3 scripts/check_traceability.py
+python3 -m unittest discover -s tests -v
+python3 scripts/build_standalone.py
 ```
 
-No build step is required for the current HTML demonstration.
+The last command creates `build/StudyFlow-3.0-fixed-standalone.html`, with the same tested JavaScript embedded for sharing as one file. Generated files are ignored by Git. The CI workflow runs syntax, traceability/contracts, requirement tests and this build on pushes and pull requests.
 
-The demo includes task management, student availability, task prioritization, study-plan generation, replanning, workload-shortfall reporting, and a requirements-coverage view.
+Read [docs/traceability.md](docs/traceability.md) and [E's recording guide](docs/recording-guide-E.md) for the Codebase-to-Model demonstration. The selected trace is F.1.5 → F.1.5.1–F.1.5.5 → C.2.5.1–C.2.5.5 → actual functions and named tests.
 
 ---
 
@@ -268,24 +262,11 @@ The dated XML files preserve milestone snapshots of the model.
 
 ## 11. Current Project Status
 
-As of Milestone Check 1, the project has established:
+The supplied demo 3.0 has been organized into planning, storage and interaction modules. Planning fixes normalize overlapping availability, allocate multiple bounded sessions per window, retain overdue unfinished tasks as shortfalls and keep what-if preview windows aligned with Apply. Explicit planning time supports deterministic tests. Invalid confirmed input/save failures roll back the displayed input state. Requirements badges describe implementation traces rather than blanket verification claims.
 
-- System of Interest and project scope
-- System context and operational behavior
-- Stakeholder analysis
-- Stakeholder needs baseline
-- Stakeholder requirements baseline
-- Need-to-requirement traceability
-- Product specification
-- Interactive walking-skeleton artifact
+The repository includes 21 requirement-named checks and a source/link consistency checker. They cover the listed fixtures, not every system acceptance condition. Inspect [verification evidence](docs/verification.md) and the actual current-commit GitHub Actions run before describing CI as passed.
 
-Current development priorities include:
-
-- Verifying acceptance criteria against the implementation
-- Expanding automated acceptance tests
-- Strengthening model-to-code traceability
-- Documenting component interfaces
-- Continuing functional and physical architecture development
+Remaining product boundaries include authenticated access control, optional external Calendar/LMS/LLM transports, timed student usability pilots and complete system-level acceptance. The 3-second planning target is checked only on a representative fixture; it does not establish the separate save-to-display system response time.
 
 ---
 

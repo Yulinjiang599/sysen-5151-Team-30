@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "model_source": "Team Chapter 8\u20139 report and model evidence reviewed 2026-10-30; see source-baseline.json",
+  "test_file": "tests/test_functional_requirements.py",
+  "entries": [
+    {
+      "function_id": "F.1.1",
+      "function_name": "Receive and Maintain Academic Task Data",
+      "module": "Study Flow/js/app.js",
+      "symbol": "change",
+      "line": 42,
+      "requirement_ids": [
+        "1.4.1",
+        "SR-03",
+        "SR-06"
+      ],
+      "tests": [
+        "test_SR_03_UI_boot_save_edit_replan",
+        "test_SR_03_UI_failed_save_rolls_back",
+        "test_SR_06_UI_reopen_and_invalid_saved_profile"
+      ]
+    },
+    {
+      "function_id": "F.1.2",
+      "function_name": "Capture Study Availability",
+      "module": "Study Flow/js/app.js",
+      "symbol": "renderAvailability",
+      "line": 54,
+      "requirement_ids": [
+        "1.4.2",
+        "SR-02"
+      ],
+      "tests": [
+        "test_CR_02_commitments_and_overlap_normalization"
+      ]
+    },
+    {
+      "function_id": "F.1.3",
+      "function_name": "Analyze Deadlines and Workload",
+      "module": "Study Flow/js/planning.js",
+      "symbol": "remaining",
+      "line": 30,
+      "requirement_ids": [
+        "1.4.3",
+        "SR-01"
+      ],
+      "tests": [
+        "test_1_4_3_remaining_work"
+      ]
+    },
+    {
+      "function_id": "F.1.4",
+      "function_name": "Calculate Task Priorities",
+      "module": "Study Flow/js/planning.js",
+      "symbol": "calculateTaskPriorities",
+      "line": 60,
+      "requirement_ids": [
+        "1.4.4",
+        "SR-01",
+        "SR-08"
+      ],
+      "tests": [
+        "test_SR_01_priority_fixed_scenarios"
+      ]
+    },
+    {
+      "function_id": "F.1.5",
+      "function_name": "Generate Feasible Study Plan",
+      "module": "Study Flow/js/planning.js",
+      "symbol": "generateFeasibleStudyPlan",
+      "line": 227,
+      "requirement_ids": [
+        "1.4.5",
+        "SR-02",
+        "SR-04"
+      ],
+      "tests": [
+        "test_SR_02_deadline_capacity_and_no_overlap",
+        "test_SR_04_overdue_and_empty_availability"
+      ]
+    },
+    {
+      "function_id": "F.1.5.1",
+      "function_name": "Identify Scheduling Constraints",
+      "module": "Study Flow/js/planning.js",
+      "symbol": "identifySchedulingConstraints",
+      "line": 80,
+      "requirement_ids": [
+        "1.4.5",
+        "CR-1",
+        "CR-6"
+      ],
+      "tests": [
+        "test_CR_01_constraints_validation"
+      ]
+    },
+    {
+      "function_id": "F.1.5.2",
+      "function_name": "Determine Available Study Slots",
+      "module": "Study Flow/js/planning.js",
+      "symbol": "determineAvailableStudySlots",
+      "line": 135,
+      "requirement_ids": [
+        "1.4.5",
+        "CR-2"
+      ],
+      "tests": [
+        "test_CR_02_commitments_and_overlap_normalization",
+        "test_CR_02_never_schedule_before_now",
+        "test_CR_02_dst_local_calendar_days"
+      ]
+    },
+    {
+      "function_id": "F.1.5.3",
+      "function_name": "Allocate Prioritized Tasks",
+      "module": "Study Flow/js/planning.js",
+      "symbol": "allocatePrioritizedTasks",
+      "line": 159,
+      "requirement_ids": [
+        "1.4.5",
+        "CR-3"
+      ],
+      "tests": [
+        "test_CR_03_long_window_multiple_sessions",
+        "test_SR_02_deadline_capacity_and_no_overlap"
+      ]
+    },
+    {
+      "function_id": "F.1.5.4",
+      "function_name": "Evaluate Schedule Feasibility",
+      "module": "Study Flow/js/planning.js",
+      "symbol": "evaluateScheduleFeasibility",
+      "line": 192,
+      "requirement_ids": [
+        "1.4.5",
+        "CR-4"
+      ],
+      "tests": [
+        "test_CR_04_detect_invalid_proposal"
+      ]
+    },
+    {
+      "function_id": "F.1.5.5",
+      "function_name": "Generate Feasible Study Plan",
+      "module": "Study Flow/js/planning.js",
+      "symbol": "assembleStudyPlan",
+      "line": 220,
+      "requirement_ids": [
+        "1.4.5",
+        "CR-5",
+        "CR-7",
+        "CR-8",
+        "CR-10"
+      ],
+      "tests": [
+        "test_CR_10_session_task_association",
+        "test_SR_02_deadline_capacity_and_no_overlap"
+      ]
+    },
+    {
+      "function_id": "F.1.6",
+      "function_name": "Update and Present Study Plan",
+      "module": "Study Flow/js/app.js",
+      "symbol": "persist",
+      "line": 40,
+      "requirement_ids": [
+        "1.4.6",
+        "SR-03",
+        "SR-04"
+      ],
+      "tests": [
+        "test_SR_03_UI_boot_save_edit_replan",
+        "test_SR_03_UI_failed_save_rolls_back"
+      ]
+    }
+  ]
+}
