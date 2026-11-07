@@ -1,0 +1,144 @@
+Browser tab: 1, Title: "StudyFlow — Academic command center", URL: "http://127.0.0.1:8765/studyflow_demo.html".
+1 AXWebArea StudyFlow — Academic command center, URL: 127.0.0.1:8765/studyflow_demo.html
+	2 container
+		3 text S
+		4 text StudyFlow
+		5 text SYSEN 5151 · TEAM 30
+		6 container nav
+			7 button Command center
+			8 button Tasks
+			9 button Capacity
+			10 button Study plan
+			11 button System design
+		12 text PLANNING ENGINE
+		13 text Deterministic v2.0
+		14 text Constraint-safe, explainable, and recalculated from every saved input.
+		15 container
+			29 text PORTFOLIO INPUTS
+			17 heading Good morning, Alex., Value: 1, ID: greeting
+				18 text Good morning, Alex.
+			19 text Saved locally
+			20 button (disabled) Description: Undo last change, ID: undoBtn
+			21 button Commands ⌘K, ID: paletteBtn
+				22 text Commands
+				23 text ⌘K
+			24 button Product tour, ID: guideBtn
+			25 pop up button (collapsed, settable) Value: Alex Chen, ID: userSelect, Secondary Actions: Expand
+				26 menu
+					27 (selected) Alex Chen
+					28 Maya Patel
+		30 container tasks
+			31 heading Task portfolio, Value: 2
+				32 text Task portfolio
+			33 text Model effort, importance, and cognitive load—not just due dates.
+			34 button Add task, ID: addTask
+			35 table
+				36 row
+					37 cell
+						38 text TASK
+					39 cell
+						40 text DEADLINE
+					41 cell
+						42 text EFFORT
+					43 cell
+						44 text STATE
+					45 cell
+						46 text IMPORTANCE / ENERGY
+					47 cell
+						48 text SCORE
+						49 button How priority score works
+					50 cell
+						51 text ACTIONS
+				52 container taskRows
+					53 row
+						54 cell
+							55 text Binary Search Tree Assignment
+							56 text 180m remaining
+						57 cell
+							58 text Nov 8, 11:00 PM
+						59 cell
+							60 text 60 / 240m
+						61 cell
+							62 text IN PROGRESS
+						63 cell
+							64 text Critical · high
+						65 cell
+							66 text 25
+						67 cell
+							68 button Focus
+							69 button Edit
+							70 button Delete
+					71 row
+						72 cell
+							73 text Linear Algebra Midterm Review
+							74 text 180m remaining
+						75 cell
+							76 text Nov 9, 4:00 PM
+						77 cell
+							78 text 30 / 210m
+						79 cell
+							80 text IN PROGRESS
+						81 cell
+							82 text Critical · high
+						83 cell
+							84 text 20
+						85 cell
+							86 button Focus
+							87 button Edit
+							88 button Delete
+					89 row
+						90 cell
+							91 text Course Project Report
+							92 text 180m remaining
+						93 cell
+							94 text Nov 11, 5:00 PM
+						95 cell
+							96 text 0 / 180m
+						97 cell
+							98 text NOT STARTED
+						99 cell
+							100 text High · medium
+						101 cell
+							102 text 13
+						103 cell
+							104 button Focus
+							105 button Edit
+							106 button Delete
+					107 row
+						108 cell
+							109 text Recursion Quiz Practice
+							110 text 0m remaining
+						111 cell
+							112 text Nov 7, 12:00 PM
+						113 cell
+							114 text 90 / 90m
+						115 cell
+							116 text COMPLETED
+						117 cell
+							118 text Medium · medium
+						119 cell
+							120 text —
+						121 cell
+							122 button Focus
+							123 button Edit
+							124 button Delete
+					125 row
+						126 cell
+							127 text D Browser Check
+							128 text 120m remaining
+						129 cell
+							130 text Nov 9, 5:00 PM
+						131 cell
+							132 text 0 / 120m
+						133 cell
+							134 text NOT STARTED
+						135 cell
+							136 text Medium · medium
+						137 cell
+							138 text 19
+						139 cell
+							140 button Focus
+							141 button Edit
+							142 button Delete
+
+The focused UI element is 8 button Tasks

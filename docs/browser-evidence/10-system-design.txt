@@ -1,0 +1,58 @@
+Browser tab: 2, Title: "StudyFlow — Academic command center", URL: "http://127.0.0.1:8765/studyflow_demo.html".
+0 AXWebArea StudyFlow — Academic command center, URL: 127.0.0.1:8765/studyflow_demo.html
+	1 container
+		2 text S
+		3 text StudyFlow
+		4 text SYSEN 5151 · TEAM 30
+		5 container nav
+			6 button Command center
+			7 button Tasks
+			8 button Capacity
+			9 button Study plan
+			10 button System design
+		11 text PLANNING ENGINE
+		12 text Deterministic v2.0
+		13 text Constraint-safe, explainable, and recalculated from every saved input.
+		14 container
+			74 text TRACEABILITY & ARCHITECTURE
+			16 heading Good morning, Alex., Value: 1, ID: greeting
+				38 text Good morning, Alex.
+			18 text Saved locally
+			19 button (disabled) Description: Undo last change, ID: undoBtn
+			20 button Commands ⌘K, ID: paletteBtn
+				21 text Commands
+				22 text ⌘K
+			23 button Product tour, ID: guideBtn
+			24 pop up button (collapsed, settable) Value: Alex Chen, ID: userSelect, Secondary Actions: Expand
+				25 menu
+					26 (selected) Alex Chen
+					27 Maya Patel
+		75 container requirements
+			76 heading Requirements & system design, Value: 2
+				77 text Requirements & system design
+			78 text Traceable stakeholder coverage with an inspectable engineering story.
+			79 text SR-01–SR-10 MAPPED
+			80 container reqGrid
+				81 text SR-01 AC-01 · IMPLEMENTATION TRACE
+				82 text Rank next work with transparent weighted rationale.
+				83 text SR-02 AC-02 · IMPLEMENTATION TRACE
+				84 text Schedule only inside availability and around commitments.
+				85 text SR-03 AC-03 · IMPLEMENTATION TRACE
+				86 text Replan after every confirmed input change.
+				87 text SR-04 AC-04 · IMPLEMENTATION TRACE
+				88 text Report exact unscheduled minutes by task.
+				89 text SR-05 AC-05 · IMPLEMENTATION TRACE
+				90 text Guide the first-plan experience with an onboarding tour.
+				91 text SR-06 AC-06 · IMPLEMENTATION TRACE
+				92 text Persist versioned state safely in localStorage.
+				93 text SR-07 AC-07 · IMPLEMENTATION TRACE
+				94 text Isolate Alex and Maya workspaces.
+				95 text SR-08 AC-08 · IMPLEMENTATION TRACE
+				96 text Apply deterministic, inspectable scoring and tie-breaks.
+				97 text SR-09 AC-09 · IMPLEMENTATION TRACE
+				98 text Trace UI behavior to acceptance criteria.
+				99 text SR-10 AC-10 · IMPLEMENTATION TRACE
+				100 text Separate interaction, planning, and persistence concerns.
+		73 text Plan regenerated from the latest inputs.
+
+The focused UI element is 10 button System design

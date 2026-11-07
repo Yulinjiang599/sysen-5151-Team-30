@@ -1,0 +1,34 @@
+name: StudyFlow D verification
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify model links, interfaces, tests and build
+        run: python scripts/verify.py
+      - name: Upload actual execution evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: studyflow-d-verification
+          path: |
+            evidence/ci-summary.json
+            evidence/verification.log
+            build/StudyFlow-3.0-fixed-standalone.html
+          if-no-files-found: warn

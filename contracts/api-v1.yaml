@@ -1,0 +1,860 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "StudyFlow local interface contract",
+    "version": "1.1.0",
+    "description": "Actual local JavaScript interfaces. No HTTP application API is implemented; paths remains empty. JSON notation is valid YAML. Schemas describe the recommended JSON-serialized pipeline representation, not a guarantee that each function validates every field. Date instances remain Date objects in memory. UI metadata constraints are descriptive and are not all enforced by the core."
+  },
+  "paths": {},
+  "x-transport": "in-process JavaScript, not HTTP",
+  "x-local-operations": [
+    {
+      "operationId": "calculateTaskPriorities",
+      "module": "Study Flow/js/planning.js",
+      "functionId": "F.1.4",
+      "parameters": [
+        "tasks",
+        "now"
+      ],
+      "returns": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/RankedTask"
+        }
+      },
+      "errors": [
+        "Explicit TypeError for invalid task data/reference time; malformed containers can raise native errors."
+      ],
+      "parameterContracts": {
+        "tasks": {
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Task"
+            }
+          }
+        },
+        "now": {
+          "required": false,
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "defaultBehavior": "new Date()",
+          "runtimeType": "Date|string|number"
+        }
+      },
+      "preconditions": [
+        "validateTasks validates task IDs, workloads, status and deadlines."
+      ],
+      "sideEffectsAndOwnership": "No caller-task mutation; no storage/network. Filters complete and overdue work; returns copied ranked task records.",
+      "x-requirement-contributions": [
+        "1.4.4",
+        "SR-01",
+        "SR-08"
+      ],
+      "x-link-meaning": "Code implementation contributions using existing IDs, not additional native model trace links."
+    },
+    {
+      "operationId": "identifySchedulingConstraints",
+      "module": "Study Flow/js/planning.js",
+      "functionId": "F.1.5.1",
+      "parameters": [
+        "profile",
+        "controls"
+      ],
+      "returns": {
+        "$ref": "#/components/schemas/Constraints"
+      },
+      "errors": [
+        "Explicit TypeError for invalid tasks, dates, availability, commitments or controls; malformed nested records may raise native TypeError."
+      ],
+      "parameterContracts": {
+        "profile": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Profile"
+          }
+        },
+        "controls": {
+          "required": false,
+          "schema": {
+            "$ref": "#/components/schemas/Controls"
+          },
+          "defaultBehavior": "{}"
+        }
+      },
+      "preconditions": [
+        "Raw active profile. Fixed time is recommended for reproducibility."
+      ],
+      "sideEffectsAndOwnership": "Copies known task/window/commitment structures and normalizes dates; arbitrary extra nested metadata is not deeply cloned.",
+      "x-requirement-contributions": [
+        "CR-1"
+      ],
+      "x-link-meaning": "Code implementation contributions using existing IDs, not additional native model trace links."
+    },
+    {
+      "operationId": "determineAvailableStudySlots",
+      "module": "Study Flow/js/planning.js",
+      "functionId": "F.1.5.2",
+      "parameters": [
+        "constraints"
+      ],
+      "returns": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Slot"
+        }
+      },
+      "errors": [
+        "Invalid HH:mm can raise TypeError; malformed context can raise native errors. No full context revalidation."
+      ],
+      "parameterContracts": {
+        "constraints": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Constraints"
+          }
+        }
+      },
+      "preconditions": [
+        "Validated context from identifySchedulingConstraints; all seven weekday arrays present."
+      ],
+      "sideEffectsAndOwnership": "No caller-context mutation; no persistence. Returns normalized intervals after commitment subtraction.",
+      "x-requirement-contributions": [
+        "CR-2"
+      ],
+      "x-link-meaning": "Code implementation contributions using existing IDs, not additional native model trace links."
+    },
+    {
+      "operationId": "allocatePrioritizedTasks",
+      "module": "Study Flow/js/planning.js",
+      "functionId": "F.1.5.3",
+      "parameters": [
+        "prioritizedTasks",
+        "availableSlots",
+        "constraints"
+      ],
+      "returns": {
+        "$ref": "#/components/schemas/Proposal"
+      },
+      "errors": [
+        "No deliberate domain exception; malformed inputs can raise native errors or produce invalid proposals."
+      ],
+      "parameterContracts": {
+        "prioritizedTasks": {
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RankedTask"
+            }
+          }
+        },
+        "availableSlots": {
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Slot"
+            }
+          }
+        },
+        "constraints": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Constraints"
+          }
+        }
+      },
+      "preconditions": [
+        "Ranked tasks use same clock/context; slots are chronological, non-overlapping and commitment-free.",
+        "Use the validated pipeline. This allocator is not an independent input validator."
+      ],
+      "sideEffectsAndOwnership": "Local slot cursors; input slots/tasks unchanged. Greedy-policy output is not proof of optimal allocation.",
+      "x-requirement-contributions": [
+        "CR-3"
+      ],
+      "x-link-meaning": "Code implementation contributions using existing IDs, not additional native model trace links."
+    },
+    {
+      "operationId": "evaluateScheduleFeasibility",
+      "module": "Study Flow/js/planning.js",
+      "functionId": "F.1.5.4",
+      "parameters": [
+        "proposal",
+        "constraints",
+        "availableSlots"
+      ],
+      "returns": {
+        "$ref": "#/components/schemas/Assessment"
+      },
+      "errors": [
+        "Supported semantic violations are returned in issues, not thrown. Malformed structures may raise native errors."
+      ],
+      "parameterContracts": {
+        "proposal": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Proposal"
+          }
+        },
+        "constraints": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Constraints"
+          }
+        },
+        "availableSlots": {
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Slot"
+            }
+          }
+        }
+      },
+      "preconditions": [
+        "Containers have expected arrays and context structure.",
+        "Slots and constraints belong to the proposal being assessed."
+      ],
+      "sideEffectsAndOwnership": "Read-only assessment; does not validate every schema property or prove global optimality.",
+      "x-requirement-contributions": [
+        "CR-4"
+      ],
+      "x-link-meaning": "Code implementation contributions using existing IDs, not additional native model trace links."
+    },
+    {
+      "operationId": "assembleStudyPlan",
+      "module": "Study Flow/js/planning.js",
+      "functionId": "F.1.5.5",
+      "parameters": [
+        "proposal",
+        "assessment"
+      ],
+      "returns": {
+        "$ref": "#/components/schemas/Plan"
+      },
+      "errors": [
+        "Explicit Error(\"Invalid study plan: ...\") when assessment.valid is false; malformed assessment can raise native errors."
+      ],
+      "parameterContracts": {
+        "proposal": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Proposal"
+          }
+        },
+        "assessment": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Assessment"
+          }
+        }
+      },
+      "preconditions": [
+        "Assessment is from the exact proposal/context; caller preserves this association."
+      ],
+      "sideEffectsAndOwnership": "Returns new wrapper referencing original blocks/shortfalls arrays. Does not recompute assessment, clone arrays, persist or send calendar updates.",
+      "x-requirement-contributions": [
+        "CR-5",
+        "CR-7",
+        "CR-8",
+        "CR-10"
+      ],
+      "x-link-meaning": "Code implementation contributions using existing IDs, not additional native model trace links."
+    },
+    {
+      "operationId": "generateFeasibleStudyPlan",
+      "module": "Study Flow/js/planning.js",
+      "functionId": "F.1.5",
+      "parameters": [
+        "profile",
+        "controls"
+      ],
+      "returns": {
+        "$ref": "#/components/schemas/Plan"
+      },
+      "errors": [
+        "Propagates validation/native errors from pipeline and Error for invalid assembled proposal."
+      ],
+      "parameterContracts": {
+        "profile": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Profile"
+          }
+        },
+        "controls": {
+          "required": false,
+          "schema": {
+            "$ref": "#/components/schemas/Controls"
+          },
+          "defaultBehavior": "{}"
+        }
+      },
+      "preconditions": [
+        "Raw profile enters this implementation, rather than an externally ranked task set."
+      ],
+      "sideEffectsAndOwnership": "No DOM/storage/network; performs ranking internally and returns valid plans including reported capacity shortages.",
+      "x-requirement-contributions": [
+        "1.4.5"
+      ],
+      "x-link-meaning": "Code implementation contributions using existing IDs, not additional native model trace links."
+    },
+    {
+      "operationId": "loadState",
+      "module": "Study Flow/js/storage.js",
+      "functionId": "F.1.1",
+      "parameters": [
+        "storage",
+        "fallback",
+        "migrate"
+      ],
+      "returns": {
+        "description": "Caller-defined runtime value; State is the application usage convention, not an adapter-enforced return schema."
+      },
+      "description": "On missing/malformed saved state, returns caller fallback via migration.",
+      "parameterContracts": {
+        "storage": {
+          "required": true,
+          "schema": {},
+          "runtimeType": "Object implementing getItem(key) -> string|null"
+        },
+        "fallback": {
+          "required": true,
+          "schema": {},
+          "runtimeType": "Function () -> caller fallback value"
+        },
+        "migrate": {
+          "required": false,
+          "schema": {},
+          "defaultBehavior": "value => value",
+          "runtimeType": "Function(value) -> restored value"
+        }
+      },
+      "preconditions": [
+        "Caller owns fallback, migration and application-state validation."
+      ],
+      "errors": [
+        "Read/JSON-parse/initial-migration failures invoke migrate(fallback()). Errors from that recovery call propagate."
+      ],
+      "sideEffectsAndOwnership": "Reads studyflow_demo_v3; no writes. Adapter returns arbitrary caller migration/fallback result; it does not itself enforce State schema.",
+      "x-requirement-contributions": [
+        "SR-06"
+      ],
+      "x-link-meaning": "Code implementation contributions using existing IDs, not additional native model trace links."
+    },
+    {
+      "operationId": "saveState",
+      "module": "Study Flow/js/storage.js",
+      "functionId": "F.1.6",
+      "parameters": [
+        "storage",
+        "state"
+      ],
+      "returns": {
+        "description": "Caller-defined runtime value; State is the application usage convention, not an adapter-enforced return schema."
+      },
+      "description": "Persists JSON using supplied Storage; propagates write errors.",
+      "parameterContracts": {
+        "storage": {
+          "required": true,
+          "schema": {},
+          "runtimeType": "Object implementing setItem(key, string)"
+        },
+        "state": {
+          "required": true,
+          "schema": {},
+          "runtimeType": "Caller-supplied JSON-stringifiable value"
+        }
+      },
+      "preconditions": [
+        "Caller validates app state if State shape is required."
+      ],
+      "errors": [
+        "Propagates JSON serialization and storage write errors; no rollback in adapter."
+      ],
+      "sideEffectsAndOwnership": "Writes studyflow_demo_v3 using JSON.stringify(state); returns same state reference. No adapter-level State validation.",
+      "x-requirement-contributions": [
+        "SR-03",
+        "SR-06"
+      ],
+      "x-link-meaning": "Code implementation contributions using existing IDs, not additional native model trace links."
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Task": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "deadline",
+          "minutes",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "deadline": {
+            "type": "string",
+            "format": "date-time",
+            "x-runtime-type": "Date-constructor-compatible value; use ISO date-time in serialized fixtures. Accepted/coerced runtime inputs may be broader than this schema."
+          },
+          "minutes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "completed": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "todo",
+              "progress",
+              "done"
+            ]
+          },
+          "importance": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4
+          },
+          "energy": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ]
+          },
+          "difficulty": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4
+          }
+        },
+        "x-semantic-constraints": [
+          "Task IDs are unique within an input task array.",
+          "name.trim() must not be empty.",
+          "0 <= completed <= minutes; all three workload quantities use integer minutes.",
+          "Importance, energy and difficulty are retained UI metadata, not ranking inputs; core validateTasks does not enforce their schemas."
+        ]
+      },
+      "Window": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 2,
+        "items": {
+          "type": "string",
+          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+        },
+        "description": "Local start/end HH:mm; start precedes end.",
+        "x-semantic-constraints": [
+          "start must precede end; no overnight window syntax."
+        ]
+      },
+      "Commitment": {
+        "type": "object",
+        "required": [
+          "start",
+          "end"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "start": {
+            "type": "string",
+            "format": "date-time",
+            "x-runtime-type": "Date in validated pipeline; ISO date-time after JSON serialization."
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time",
+            "x-runtime-type": "Date in validated pipeline; ISO date-time after JSON serialization."
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "x-semantic-constraints": [
+          "start must precede end."
+        ]
+      },
+      "Profile": {
+        "type": "object",
+        "required": [
+          "tasks",
+          "availability"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Task"
+            }
+          },
+          "availability": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Window"
+              }
+            },
+            "description": "Weekday keys 0 (Sunday) through 6; missing days mean empty arrays.",
+            "x-semantic-constraints": [
+              "Only weekday keys 0..6 are consumed by normalization; omitted weekdays become empty arrays. Extra keys are ignored by current code."
+            ]
+          },
+          "commitments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Commitment"
+            }
+          }
+        }
+      },
+      "Controls": {
+        "type": "object",
+        "properties": {
+          "now": {
+            "type": "string",
+            "format": "date-time",
+            "x-runtime-type": "Date|string|number accepted by Date constructor; omitted means new Date().",
+            "description": "Supply fixed clock and timezone to reproduce results. Runtime default is current time, not a fixed timestamp."
+          },
+          "horizonDays": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 31,
+            "default": 7
+          },
+          "maxSessionMinutes": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 90
+          },
+          "extraMinutes": {
+            "type": "integer",
+            "enum": [
+              0,
+              30,
+              60
+            ],
+            "default": 0
+          }
+        },
+        "description": "No external storage/network; explicit now makes results repeatable.",
+        "x-policy-status": "Defaults are existing implementation policy, not newly approved requirements."
+      },
+      "Slot": {
+        "type": "object",
+        "required": [
+          "start",
+          "end"
+        ],
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "date-time",
+            "x-runtime-type": "Date in validated pipeline; ISO date-time after JSON serialization."
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time",
+            "x-runtime-type": "Date in validated pipeline; ISO date-time after JSON serialization."
+          }
+        }
+      },
+      "RankedTask": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Task"
+          },
+          {
+            "type": "object",
+            "required": [
+              "remaining",
+              "score"
+            ],
+            "properties": {
+              "remaining": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "score": {
+                "type": "number"
+              }
+            }
+          }
+        ]
+      },
+      "Block": {
+        "type": "object",
+        "required": [
+          "taskId",
+          "name",
+          "start",
+          "end",
+          "duration",
+          "status"
+        ],
+        "properties": {
+          "taskId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "start": {
+            "type": "string",
+            "format": "date-time",
+            "x-runtime-type": "Date in validated pipeline; ISO date-time after JSON serialization."
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time",
+            "x-runtime-type": "Date in validated pipeline; ISO date-time after JSON serialization."
+          },
+          "duration": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "todo",
+              "progress",
+              "done"
+            ]
+          }
+        }
+      },
+      "Shortfall": {
+        "type": "object",
+        "required": [
+          "taskId",
+          "name",
+          "minutes"
+        ],
+        "properties": {
+          "taskId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "minutes": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "Plan": {
+        "type": "object",
+        "required": [
+          "blocks",
+          "shortfalls"
+        ],
+        "properties": {
+          "blocks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Block"
+            }
+          },
+          "shortfalls": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Shortfall"
+            }
+          }
+        },
+        "x-semantic-constraints": [
+          "In assessed valid results, sessions respect availability, commitments, deadlines, horizon and maximum duration.",
+          "Per task, scheduled duration plus shortfall equals remaining workload.",
+          "A valid partial plan may have shortfalls. Assembly rejects invalid assessment, not merely feasible=false."
+        ]
+      },
+      "Assessment": {
+        "type": "object",
+        "required": [
+          "valid",
+          "feasible",
+          "issues",
+          "unscheduledMinutes"
+        ],
+        "properties": {
+          "valid": {
+            "type": "boolean"
+          },
+          "feasible": {
+            "type": "boolean"
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "unscheduledMinutes": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "x-semantic-constraints": [
+          "valid is true iff issues is empty.",
+          "feasible is true iff valid and proposal.shortfalls is empty.",
+          "unscheduledMinutes sums reported shortfall minutes; it is not an optimization proof."
+        ]
+      },
+      "Constraints": {
+        "type": "object",
+        "required": [
+          "tasks",
+          "availability",
+          "commitments",
+          "now",
+          "horizonEnd",
+          "horizonDays",
+          "maxSessionMinutes",
+          "extraMinutes",
+          "ruleVersion"
+        ],
+        "properties": {
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Task"
+            }
+          },
+          "availability": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Window"
+              }
+            },
+            "x-semantic-constraints": [
+              "Normalized context has all weekday keys 0..6, each containing an array of windows."
+            ]
+          },
+          "commitments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Commitment"
+            }
+          },
+          "now": {
+            "type": "string",
+            "format": "date-time",
+            "x-runtime-type": "Date in validated pipeline; ISO date-time after JSON serialization."
+          },
+          "horizonEnd": {
+            "type": "string",
+            "format": "date-time",
+            "x-runtime-type": "Date in validated pipeline; ISO date-time after JSON serialization."
+          },
+          "horizonDays": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 31,
+            "default": 7
+          },
+          "maxSessionMinutes": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 90
+          },
+          "extraMinutes": {
+            "type": "integer",
+            "enum": [
+              0,
+              30,
+              60
+            ],
+            "default": 0
+          },
+          "ruleVersion": {
+            "type": "string",
+            "enum": [
+              "urgency-pressure-v1"
+            ]
+          }
+        }
+      },
+      "State": {
+        "type": "object",
+        "required": [
+          "version",
+          "active",
+          "users"
+        ],
+        "properties": {
+          "version": {
+            "type": "integer",
+            "enum": [
+              4
+            ]
+          },
+          "active": {
+            "type": "string"
+          },
+          "tourSeen": {
+            "type": "boolean"
+          },
+          "users": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Profile"
+            }
+          },
+          "timer": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "Proposal": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Plan"
+          }
+        ],
+        "description": "Candidate blocks and shortfalls before assessment; structurally the same JSON shape as Plan. Semantic violations are intentionally possible for negative assessment cases."
+      }
+    }
+  },
+  "x-baseline": {
+    "code_commit": "1070d4835850e461ae5db4ba54047c0f491af9a2",
+    "model_source": "User-supplied SysEn 5151 Project Team 30.xml",
+    "scope": "Working-copy interface documentation; no model or application behavior change."
+  },
+  "x-model-boundary-notes": [
+    "F.1.5/CR-6 expects Prioritized Task Set in XML; actual entry receives raw profile and ranks internally. Pending team review.",
+    "Extra task/context parameters are implementation propagation, not newly approved XML arrows.",
+    "C.2.5.1 uses entity 281610; duplicate New Asset 281615 is excluded.",
+    "CR-14 acceptance remains pending; documentation alone is not proof of complete satisfaction."
+  ]
+}
