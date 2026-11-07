@@ -1,0 +1,100 @@
+Browser tab: 2, Title: "StudyFlow — Academic command center", URL: "http://127.0.0.1:8765/studyflow_demo.html".
+0 AXWebArea StudyFlow — Academic command center, URL: 127.0.0.1:8765/studyflow_demo.html
+	1 container
+		2 text S
+		3 text StudyFlow
+		4 text SYSEN 5151 · TEAM 30
+		5 container nav
+			6 button Command center
+			7 button Tasks
+			8 button Capacity
+			9 button Study plan
+			10 button System design
+		11 text PLANNING ENGINE
+		12 text Deterministic v2.0
+		13 text Constraint-safe, explainable, and recalculated from every saved input.
+		14 container
+			15 text TODAY’S OPERATING BRIEF
+			16 heading Good morning, Alex., Value: 1, ID: greeting
+				17 text Good morning, Alex.
+			18 text Saved locally
+			19 button (disabled) Description: Undo last change, ID: undoBtn
+			20 button Commands ⌘K, ID: paletteBtn
+				21 text Commands
+				22 text ⌘K
+			23 button Product tour, ID: guideBtn
+			24 pop up button (collapsed, settable) Value: Alex Chen, ID: userSelect, Secondary Actions: Expand
+				25 menu
+					26 (selected) Alex Chen
+					27 Maya Patel
+		28 container dashboard
+			29 container
+				30 text EXECUTIVE COMMAND CENTER
+				31 heading Make the next hour count—not just the next deadline., Value: 2
+					32 text Make the next hour count—not just the next deadline.
+				33 text Your workload, fixed commitments, deadline pressure, and available capacity are recomputed into one realistic operating plan.
+				34 button Start focus, ID: heroFocus
+				35 button Run what-if, ID: heroWhatIf
+				36 container nextCard
+					37 text TODAY’S BEST ACTION · SR-01
+					38 heading Binary Search Tree Assignment, Value: 3
+						39 text Binary Search Tree Assignment
+					40 text in 3d · 180m left — highest urgency-pressure score.
+					41 text Nov 8, 11:00 PM
+					42 text 180m left
+			43 container stats
+				44 text 4
+				45 text Active work
+				46 text ranked items
+				47 text 14.5h
+				48 text Capacity
+				49 text after commitments
+				50 text 48%
+				51 text Pressure
+				52 text 240m short
+				53 text 21%
+				54 text Completion
+				55 text 180m invested
+			56 heading Capacity pressure, Value: 3
+				57 text Capacity pressure
+			58 text Scheduled work versus usable study capacity by day.
+			59 text LIVE MODEL
+			60 container donut
+				61 image
+				62 container
+					63 text 48% utilized
+			64 container capacityBars
+				65 text Fri
+				66 text 0m
+				67 text Sat
+				68 text 120m
+				69 text Sun
+				70 text 120m
+				71 text Mon
+				72 text 120m
+				73 text Tue
+				74 text 60m
+			75 heading Priority stack, Value: 3
+				76 text Priority stack
+			77 button How priority score works
+			78 text Transparent score: urgency and workload pressure.
+			79 button Manage
+			80 container ranking
+				81 text 1
+				82 text Binary Search Tree Assignment
+				83 text in 3d · 180m left — highest urgency-pressure score.
+				84 text 25
+				85 text 2
+				86 text Linear Algebra Midterm Review
+				87 text in 3d · 180m left — ranked by urgency and workload pressure.
+				88 text 20
+				89 text 3
+				90 text D Browser Check
+				91 text in 3d · 120m left — ranked by urgency and workload pressure.
+				92 text 19
+				93 text 4
+				94 text Course Project Report
+				95 text in 5d · 180m left — ranked by urgency and workload pressure.
+				96 text 13
+
+The focused UI element is 0 AXWebArea StudyFlow — Academic command center, URL: 127.0.0.1:8765/studyflow_demo.html

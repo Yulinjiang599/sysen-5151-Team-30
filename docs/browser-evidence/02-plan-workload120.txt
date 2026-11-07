@@ -1,0 +1,87 @@
+Browser tab: 1, Title: "StudyFlow — Academic command center", URL: "http://127.0.0.1:8765/studyflow_demo.html".
+0 AXWebArea StudyFlow — Academic command center, URL: 127.0.0.1:8765/studyflow_demo.html
+	1 container
+		2 text S
+		3 text StudyFlow
+		4 text SYSEN 5151 · TEAM 30
+		5 container nav
+			6 button Command center
+			7 button Tasks
+			8 button Capacity
+			9 button Study plan
+			10 button System design
+		11 text PLANNING ENGINE
+		12 text Deterministic v2.0
+		13 text Constraint-safe, explainable, and recalculated from every saved input.
+		14 container
+			260 text CONSTRAINT-SAFE SCHEDULE
+			16 heading Good morning, Alex., Value: 1, ID: greeting
+				168 text Good morning, Alex.
+			18 text Saved locally
+			19 button Description: Undo last change, ID: undoBtn
+			20 button Commands ⌘K, ID: paletteBtn
+				21 text Commands
+				22 text ⌘K
+			23 button Product tour, ID: guideBtn
+			24 pop up button (collapsed, settable) Value: Alex Chen, ID: userSelect, Secondary Actions: Expand
+				25 menu
+					26 (selected) Alex Chen
+					27 Maya Patel
+		261 container plan
+			262 heading Generated study plan, Value: 2
+				263 text Generated study plan
+			264 text A seven-day, conflict-aware schedule. Commitments are reserved first.
+			265 button Calendar
+			266 button Agenda
+			267 button What-if, ID: whatIfBtn
+			268 button Regenerate, ID: regenerate
+			269 container planAlert
+				270 text Capacity shortfall: 360 unscheduled minutes
+				271 text No double-booking occurred. Test more time or a deadline adjustment in What-if. Binary Search Tree Assignment
+				272 text 60m short
+				273 text Linear Algebra Midterm Review
+				274 text 180m short
+				275 text D Browser Check
+				276 text 120m short
+			277 container schedule
+				278 container
+					279 text Friday
+					280 text November 6
+				281 text No scheduled items
+				282 container
+					283 text Saturday
+					284 text November 7
+				285 container
+					286 text 10:00 AM–11:30 AM · Binary Search Tree Assignment 90m study block · progress
+				287 container
+					288 text 11:30 AM–12:00 PM · Binary Search Tree Assignment 30m study block · progress
+				289 container
+					290 text Sunday
+					291 text November 8
+				292 container
+					293 text 6:00 PM–7:15 PM · SYSEN 5151 Class Fixed commitment · capacity reserved
+				294 container
+					295 text Monday
+					296 text November 9
+				297 container
+					298 text 6:00 PM–7:30 PM · Course Project Report 90m study block · todo
+				299 container
+					300 text 7:30 PM–8:00 PM · Course Project Report 30m study block · todo
+				301 container
+					302 text Tuesday
+					303 text November 10
+				304 container
+					305 text 4:00 PM–4:45 PM · Project team sync Fixed commitment · capacity reserved
+				306 container
+					307 text 5:30 PM–6:30 PM · Course Project Report 60m study block · todo
+				308 container
+					309 text Wednesday
+					310 text November 11
+				311 text No scheduled items
+				312 container
+					313 text Thursday
+					314 text November 12
+				315 text No scheduled items
+		259 text Task saved. Priority and plan recalculated.
+
+The focused UI element is 9 button Study plan

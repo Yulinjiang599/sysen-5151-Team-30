@@ -1,0 +1,127 @@
+Browser tab: 1, Title: "StudyFlow — Academic command center", URL: "http://127.0.0.1:8765/studyflow_demo.html".
+1 AXWebArea StudyFlow — Academic command center, URL: 127.0.0.1:8765/studyflow_demo.html
+	2 container
+		3 text S
+		4 text StudyFlow
+		5 text SYSEN 5151 · TEAM 30
+		6 container nav
+			7 button Command center
+			8 button Tasks
+			9 button Capacity
+			10 button Study plan
+			11 button System design
+		12 text PLANNING ENGINE
+		13 text Deterministic v2.0
+		14 text Constraint-safe, explainable, and recalculated from every saved input.
+		15 container
+			29 text PORTFOLIO INPUTS
+			17 heading Good morning, Maya., Value: 1, ID: greeting
+				53 text Good morning, Maya.
+			19 text Saved locally
+			20 button (disabled) Description: Undo last change, ID: undoBtn
+			21 button Commands ⌘K, ID: paletteBtn
+				22 text Commands
+				23 text ⌘K
+			24 button Product tour, ID: guideBtn
+			25 pop up button (collapsed, settable) Value: Maya Patel, ID: userSelect, Secondary Actions: Expand
+				26 menu
+					27 Alex Chen
+					28 (selected) Maya Patel
+		30 container tasks
+			31 heading Task portfolio, Value: 2
+				32 text Task portfolio
+			33 text Model effort, importance, and cognitive load—not just due dates.
+			34 button Add task, ID: addTask
+			35 table
+				36 row
+					37 cell
+						38 text TASK
+					39 cell
+						40 text DEADLINE
+					41 cell
+						42 text EFFORT
+					43 cell
+						44 text STATE
+					45 cell
+						46 text IMPORTANCE / ENERGY
+					47 cell
+						48 text SCORE
+						49 button How priority score works
+					50 cell
+						51 text ACTIONS
+				52 container taskRows
+					54 row
+						55 cell
+							56 text Heat Exchanger Problem Set
+							57 text 210m remaining
+						58 cell
+							59 text Nov 7, 9:00 PM
+						60 cell
+							61 text 30 / 240m
+						62 cell
+							63 text IN PROGRESS
+						64 cell
+							65 text Critical · high
+						66 cell
+							67 text 44
+						68 cell
+							69 button Focus
+							70 button Edit
+							71 button Delete
+					72 row
+						73 cell
+							74 text Regression Lab Report
+							75 text 180m remaining
+						76 cell
+							77 text Nov 8, 3:00 PM
+						78 cell
+							79 text 0 / 180m
+						80 cell
+							81 text NOT STARTED
+						82 cell
+							83 text Critical · high
+						84 cell
+							85 text 29
+						86 cell
+							87 button Focus
+							88 button Edit
+							89 button Delete
+					90 row
+						91 cell
+							92 text Prototype Design Review Slides
+							93 text 180m remaining
+						94 cell
+							95 text Nov 10, 12:00 PM
+						96 cell
+							97 text 60 / 240m
+						98 cell
+							99 text IN PROGRESS
+						100 cell
+							101 text High · medium
+						102 cell
+							103 text 16
+						104 cell
+							105 button Focus
+							106 button Edit
+							107 button Delete
+					108 row
+						109 cell
+							110 text Statistics Quiz
+							111 text 0m remaining
+						112 cell
+							113 text Nov 7, 9:00 AM
+						114 cell
+							115 text 60 / 60m
+						116 cell
+							117 text COMPLETED
+						118 cell
+							119 text Medium · medium
+						120 cell
+							121 text —
+						122 cell
+							123 button Focus
+							124 button Edit
+							125 button Delete
+		126 text Switched to Maya Patel. Private workspace loaded.
+
+The focused UI element is 1 AXWebArea StudyFlow — Academic command center, URL: 127.0.0.1:8765/studyflow_demo.html

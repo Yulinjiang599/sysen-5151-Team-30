@@ -1,0 +1,100 @@
+{
+  "recorded_at": "2026-11-06T22:39:08.105333-05:00",
+  "browser": "ChatGPT in-app browser (actual rendered page); browser version not exposed in captured UI",
+  "origin": "http://127.0.0.1:8765/studyflow_demo.html",
+  "conditions": "Real current browser clock; application seed profiles plus synthetic D Browser Check task; no model or application-source edits.",
+  "checks": [
+    {
+      "check": "load_and_navigation",
+      "status": "passed",
+      "observed": "首次加载显示 Alex Dashboard 和首次引导；Tasks、Capacity、Study plan、System design 页面均可进入。",
+      "screenshot": null
+    },
+    {
+      "check": "create_task",
+      "status": "passed",
+      "observed": "新增 D Browser Check，60 分钟，截止 2026-11-09 17:00；任务列表显示 0 / 60m，总缺口 300 分钟。",
+      "screenshot": "01-plan-before.png"
+    },
+    {
+      "check": "edit_workload",
+      "status": "passed",
+      "observed": "将临时任务工作量改为 120 分钟；列表显示 0 / 120m，总缺口由 300 增至 360 分钟。",
+      "screenshot": "02-plan-workload120.png"
+    },
+    {
+      "check": "add_availability",
+      "status": "passed",
+      "observed": "新增 Sunday 09:00–11:00，容量 750→870 分钟，总缺口 360→240 分钟；日程新增 09:00–10:00 和 10:00–11:00 两段学习块。",
+      "screenshot": "03-plan-added-capacity.png"
+    },
+    {
+      "check": "refresh_recovery",
+      "status": "passed",
+      "observed": "刷新后任务 D Browser Check 保留 120 分钟；新增可用窗口和总缺口 240 分钟保留。",
+      "screenshot": "04-task-after-reload.png"
+    },
+    {
+      "check": "profile_switch",
+      "status": "passed_limited_scope",
+      "observed": "切换 Maya 后显示 Maya 任务，不显示 Alex 临时任务；切回 Alex 后临时任务仍在。只证明显示/规划选择，不证明授权访问。",
+      "screenshot": "05-maya-profile.png"
+    },
+    {
+      "check": "availability_recovery",
+      "status": "passed",
+      "observed": "刷新与切换后，Sunday 09:00–11:00 和 870 分钟容量仍显示。",
+      "screenshot": "06-capacity-restored.png"
+    },
+    {
+      "check": "invalid_window",
+      "status": "passed",
+      "observed": "将 Sunday 添加表单设为 20:00–19:00；页面提示 Choose a valid start and end time；已保存 09:00–11:00 窗口仍在。",
+      "screenshot": "07-invalid-window.png"
+    },
+    {
+      "check": "close_reopen",
+      "status": "passed_single_case",
+      "observed": "关闭测试页再在同一浏览器、同一本机地址重开；D Browser Check 120m、容量 14.5h、缺口 240m 保留。不是五例恢复验收，也不是退出整个浏览器或跨设备恢复。",
+      "screenshot": "08-after-close-reopen.png"
+    },
+    {
+      "check": "calendar_and_agenda",
+      "status": "passed_with_display_limit",
+      "observed": "两种视图均可显示。日历短块任务标题截断，Agenda 可读完整任务名称。",
+      "screenshot": "09-calendar.png"
+    },
+    {
+      "check": "system_design",
+      "status": "passed_limited_scope",
+      "observed": "显示 SR-01–SR-10 的 IMPLEMENTATION TRACE 标签；不是自动验收通过。",
+      "screenshot": "10-system-design.png"
+    },
+    {
+      "check": "regenerate",
+      "status": "passed",
+      "observed": "点击 Regenerate 后显示成功提示，保留当前学习块和 240 分钟缺口。",
+      "screenshot": "11-final-agenda.png"
+    }
+  ],
+  "limits": [
+    "One browser environment; not the two named/versioned browser acceptance set.",
+    "Single refresh and close/reopen sequence, not five independent recovery cases.",
+    "Native deadline editing, task completion/deletion, What-if Apply, import/export file dialogs and timer were not exercised.",
+    "No performance acceptance timing or student usability pilot.",
+    "Profile selection is not authentication or authorization.",
+    "No remote CI run for this Desktop package."
+  ],
+  "observations": [
+    "Calendar short blocks truncate long names; Agenda is a readable alternative.",
+    "UI says Private workspace loaded although there is no authenticated access; retain as a known wording issue, not privacy acceptance.",
+    "Local static server requested favicon.ico and received 404; application HTML and all three scripts loaded successfully."
+  ],
+  "source_sha256": {
+    "Study Flow/studyflow_demo.html": "5aaa143c12f185ef889bea4a4b9c116ea66316d6f40bb863a381d972fdd5df2b",
+    "Study Flow/js/planning.js": "d3e2fc3aee321e28a745f17a6ff3b3a675baf0f7c424fee6cc1570a0b7554d0b",
+    "Study Flow/js/storage.js": "9ff903ed147be38972d564264b323482e3faf4a8c7503d59692b5be88751dfb0",
+    "Study Flow/js/app.js": "632ad7ec800e8996c015e3ab4638df4b112ece942b04a3079cb3ef3c2102bd4f"
+  },
+  "cleanup": "Temporary test tabs and loopback-only HTTP server were closed. Synthetic data may remain in this browser origin localStorage; desktop source files are unchanged."
+}

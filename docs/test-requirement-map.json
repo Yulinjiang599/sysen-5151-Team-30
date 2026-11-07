@@ -1,0 +1,345 @@
+[
+  {
+    "test": "test_SR_01_priority_fixed_scenarios",
+    "requirement_ids": [
+      "SR-01"
+    ],
+    "requirement_entity_ids": {
+      "SR-01": "249213"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "12 selected-task ranking cases; displayed rationale not asserted."
+  },
+  {
+    "test": "test_1_4_3_remaining_work",
+    "requirement_ids": [
+      "1.4.3"
+    ],
+    "requirement_entity_ids": {
+      "1.4.3": "263033"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Core/storage fixture; not complete system acceptance."
+  },
+  {
+    "test": "test_CR_01_constraints_validation",
+    "requirement_ids": [
+      "CR-1"
+    ],
+    "requirement_entity_ids": {
+      "CR-1": "287374"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Core/storage fixture; not complete system acceptance."
+  },
+  {
+    "test": "test_CR_02_commitments_and_overlap_normalization",
+    "requirement_ids": [
+      "CR-2"
+    ],
+    "requirement_entity_ids": {
+      "CR-2": "287375"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Core/storage fixture; not complete system acceptance."
+  },
+  {
+    "test": "test_CR_03_long_window_multiple_sessions",
+    "requirement_ids": [
+      "CR-3"
+    ],
+    "requirement_entity_ids": {
+      "CR-3": "287376"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Core/storage fixture; not complete system acceptance."
+  },
+  {
+    "test": "test_CR_04_detect_invalid_proposal",
+    "requirement_ids": [
+      "CR-4"
+    ],
+    "requirement_entity_ids": {
+      "CR-4": "287377"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Core/storage fixture; not complete system acceptance."
+  },
+  {
+    "test": "test_SR_02_deadline_capacity_and_no_overlap",
+    "requirement_ids": [
+      "SR-02"
+    ],
+    "requirement_entity_ids": {
+      "SR-02": "249214"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Core/storage fixture; not complete system acceptance."
+  },
+  {
+    "test": "test_SR_04_overdue_and_empty_availability",
+    "requirement_ids": [
+      "SR-04"
+    ],
+    "requirement_entity_ids": {
+      "SR-04": "249218"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Core/storage fixture; not complete system acceptance."
+  },
+  {
+    "test": "test_CR_10_session_task_association",
+    "requirement_ids": [
+      "CR-10"
+    ],
+    "requirement_entity_ids": {
+      "CR-10": "287392"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Core/storage fixture; not complete system acceptance."
+  },
+  {
+    "test": "test_CR_12_repeatable_fixed_context",
+    "requirement_ids": [
+      "CR-12"
+    ],
+    "requirement_entity_ids": {
+      "CR-12": "289389"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Core/storage fixture; not complete system acceptance."
+  },
+  {
+    "test": "test_CR_13_no_external_service_or_storage",
+    "requirement_ids": [
+      "CR-13"
+    ],
+    "requirement_entity_ids": {
+      "CR-13": "289390"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Core/storage fixture; not complete system acceptance."
+  },
+  {
+    "test": "test_CR_17_active_profile_separation",
+    "requirement_ids": [
+      "CR-17"
+    ],
+    "requirement_entity_ids": {
+      "CR-17": "289420"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Core/storage fixture; not complete system acceptance."
+  },
+  {
+    "test": "test_SR_06_storage_roundtrip_and_write_failure",
+    "requirement_ids": [
+      "SR-06"
+    ],
+    "requirement_entity_ids": {
+      "SR-06": "249220"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Core/storage fixture; not complete system acceptance."
+  },
+  {
+    "test": "test_SR_06_UI_reopen_and_invalid_saved_profile",
+    "requirement_ids": [
+      "SR-06"
+    ],
+    "requirement_entity_ids": {
+      "SR-06": "249220"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Event harness with actual app handlers; native browser/timing not established."
+  },
+  {
+    "test": "test_CR_16_representative_planning_time",
+    "requirement_ids": [
+      "CR-16"
+    ],
+    "requirement_entity_ids": {
+      "CR-16": "289419"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "250-task core planning timing only; draft CR-16 bound, not UI response time."
+  },
+  {
+    "test": "test_CR_02_never_schedule_before_now",
+    "requirement_ids": [
+      "CR-2"
+    ],
+    "requirement_entity_ids": {
+      "CR-2": "287375"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Core/storage fixture; not complete system acceptance."
+  },
+  {
+    "test": "test_SR_03_what_if_preview_matches_applied_window",
+    "requirement_ids": [
+      "SR-03"
+    ],
+    "requirement_entity_ids": {
+      "SR-03": "249217"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Manually constructed profile agreement; actual preview/apply handlers not exercised."
+  },
+  {
+    "test": "test_CR_02_dst_local_calendar_days",
+    "requirement_ids": [
+      "CR-2"
+    ],
+    "requirement_entity_ids": {
+      "CR-2": "287375"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Core/storage fixture; not complete system acceptance."
+  },
+  {
+    "test": "test_SR_03_UI_boot_save_edit_replan",
+    "requirement_ids": [
+      "SR-03"
+    ],
+    "requirement_entity_ids": {
+      "SR-03": "249217"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Event harness with actual app handlers; native browser/timing not established."
+  },
+  {
+    "test": "test_SR_03_UI_failed_save_rolls_back",
+    "requirement_ids": [
+      "SR-03"
+    ],
+    "requirement_entity_ids": {
+      "SR-03": "249217"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Event harness with actual app handlers; native browser/timing not established."
+  },
+  {
+    "test": "test_SR_07_UI_switch_keeps_profile_data_separate",
+    "requirement_ids": [
+      "SR-07"
+    ],
+    "requirement_entity_ids": {
+      "SR-07": "249221"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Event harness with actual app handlers; native browser/timing not established."
+  },
+  {
+    "test": "test_SR_02_twelve_feasible_scenarios",
+    "requirement_ids": [
+      "SR-02"
+    ],
+    "requirement_entity_ids": {
+      "SR-02": "249214"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "12 feasible cases with independent expected task/start/duration outputs and zero shortfalls."
+  },
+  {
+    "test": "test_SR_08_CR_12_twelve_scenarios_three_runs",
+    "requirement_ids": [
+      "SR-08",
+      "CR-12"
+    ],
+    "requirement_entity_ids": {
+      "SR-08": "249226",
+      "CR-12": "289389"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "12 fixed scenarios \u00d7 3 runs, exact expected outputs plus equality and input-preservation checks; full approved-rule/rationale coverage remains pending."
+  },
+  {
+    "test": "test_SR_03_UI_creation_updates_schedule",
+    "requirement_ids": [
+      "SR-03"
+    ],
+    "requirement_entity_ids": {
+      "SR-03": "249217"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Event harness with actual app handlers; native browser/timing not established."
+  },
+  {
+    "test": "test_SR_03_UI_deadline_updates_schedule",
+    "requirement_ids": [
+      "SR-03"
+    ],
+    "requirement_entity_ids": {
+      "SR-03": "249217"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Event harness with actual app handlers; native browser/timing not established."
+  },
+  {
+    "test": "test_SR_03_UI_workload_updates_schedule",
+    "requirement_ids": [
+      "SR-03"
+    ],
+    "requirement_entity_ids": {
+      "SR-03": "249217"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Event harness with actual app handlers; native browser/timing not established."
+  },
+  {
+    "test": "test_SR_03_UI_completion_updates_schedule",
+    "requirement_ids": [
+      "SR-03"
+    ],
+    "requirement_entity_ids": {
+      "SR-03": "249217"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Event harness with actual app handlers; native browser/timing not established."
+  },
+  {
+    "test": "test_SR_03_UI_availability_updates_schedule",
+    "requirement_ids": [
+      "SR-03"
+    ],
+    "requirement_entity_ids": {
+      "SR-03": "249217"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Event harness with actual app handlers; native browser/timing not established."
+  },
+  {
+    "test": "test_SR_04_three_shortfall_scenarios",
+    "requirement_ids": [
+      "SR-04"
+    ],
+    "requirement_entity_ids": {
+      "SR-04": "249218"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Three independently calculated shortage cases: total capacity, deadline-limited capacity and overdue work."
+  },
+  {
+    "test": "test_CR_01_normalized_constraints_positive",
+    "requirement_ids": [
+      "CR-1"
+    ],
+    "requirement_entity_ids": {
+      "CR-1": "287374"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Core/storage fixture; not complete system acceptance."
+  },
+  {
+    "test": "test_CR_05_valid_partial_plan_preserves_outputs",
+    "requirement_ids": [
+      "CR-5"
+    ],
+    "requirement_entity_ids": {
+      "CR-5": "287378"
+    },
+    "mapping_kind": "Implementation test contribution; no new native verified-by relationship asserted",
+    "scope": "Core/storage fixture; not complete system acceptance."
+  }
+]

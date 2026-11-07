@@ -1,0 +1,184 @@
+Browser tab: 1, Title: "StudyFlow — Academic command center", URL: "http://127.0.0.1:8765/studyflow_demo.html".
+1 AXWebArea StudyFlow — Academic command center, URL: 127.0.0.1:8765/studyflow_demo.html
+	2 container
+		3 text S
+		4 text StudyFlow
+		5 text SYSEN 5151 · TEAM 30
+		6 container nav
+			7 button Command center
+			8 button Tasks
+			9 button Capacity
+			10 button Study plan
+			11 button System design
+		12 text PLANNING ENGINE
+		13 text Deterministic v2.0
+		14 text Constraint-safe, explainable, and recalculated from every saved input.
+		15 container
+			145 text CAPACITY CONSTRAINTS
+			17 heading Good morning, Alex., Value: 1, ID: greeting
+				53 text Good morning, Alex.
+			19 text Saved locally
+			20 button (disabled) Description: Undo last change, ID: undoBtn
+			21 button Commands ⌘K, ID: paletteBtn
+				22 text Commands
+				23 text ⌘K
+			24 button Product tour, ID: guideBtn
+			25 pop up button (collapsed, settable) Value: Alex Chen, ID: userSelect, Secondary Actions: Expand
+				26 menu
+					27 (selected) Alex Chen
+					28 Maya Patel
+		146 container availability
+			147 heading Capacity model, Value: 2
+				148 text Capacity model
+			149 text Study windows minus fixed commitments equals schedulable capacity.
+			150 button Reset week, ID: resetAvailability
+			151 container availabilityGrid
+				152 heading Sunday, Value: 4
+					153 text Sunday
+				154 container
+					155 text 09:00–11:00
+					156 button Remove
+				157 time field (settable) Description: Sunday start, Value: 20:00
+					158 container
+						159 stepper
+						160 stepper
+						161 stepper
+					162 pop up button Show time picker Show time picker
+				163 time field (settable) Description: Sunday end, Value: 19:00
+					164 container
+						165 stepper
+						166 stepper
+						167 stepper
+					168 pop up button Show time picker Show time picker
+				169 button Add window
+				170 heading Monday, Value: 4
+					171 text Monday
+				172 container
+					173 text 18:00–20:00
+					174 button Remove
+				175 time field (settable) Description: Monday start, Value: 17:00
+					176 container
+						177 stepper
+						178 stepper
+						179 stepper
+					180 pop up button Show time picker Show time picker
+				181 time field (settable) Description: Monday end, Value: 19:00
+					182 container
+						183 stepper
+						184 stepper
+						185 stepper
+					186 pop up button Show time picker Show time picker
+				187 button Add window
+				188 heading Tuesday, Value: 4
+					189 text Tuesday
+				190 container
+					191 text 17:30–20:00
+					192 button Remove
+				193 time field (settable) Description: Tuesday start, Value: 17:00
+					194 container
+						195 stepper
+						196 stepper
+						197 stepper
+					198 pop up button Show time picker Show time picker
+				199 time field (settable) Description: Tuesday end, Value: 19:00
+					200 container
+						201 stepper
+						202 stepper
+						203 stepper
+					204 pop up button Show time picker Show time picker
+				205 button Add window
+				206 heading Wednesday, Value: 4
+					207 text Wednesday
+				208 container
+					209 text 09:00–11:00
+					210 button Remove
+				211 container
+					212 text 18:00–20:00
+					213 button Remove
+				214 time field (settable) Description: Wednesday start, Value: 17:00
+					215 container
+						216 stepper
+						217 stepper
+						218 stepper
+					219 pop up button Show time picker Show time picker
+				220 time field (settable) Description: Wednesday end, Value: 19:00
+					221 container
+						222 stepper
+						223 stepper
+						224 stepper
+					225 pop up button Show time picker Show time picker
+				226 button Add window
+				227 heading Thursday, Value: 4
+					228 text Thursday
+				229 container
+					230 text 16:00–18:00
+					231 button Remove
+				232 time field (settable) Description: Thursday start, Value: 17:00
+					233 container
+						234 stepper
+						235 stepper
+						236 stepper
+					237 pop up button Show time picker Show time picker
+				238 time field (settable) Description: Thursday end, Value: 19:00
+					239 container
+						240 stepper
+						241 stepper
+						242 stepper
+					243 pop up button Show time picker Show time picker
+				244 button Add window
+				245 heading Friday, Value: 4
+					246 text Friday
+				247 container
+					248 text 14:00–16:30
+					249 button Remove
+				250 time field (settable) Description: Friday start, Value: 17:00
+					251 container
+						252 stepper
+						253 stepper
+						254 stepper
+					255 pop up button Show time picker Show time picker
+				256 time field (settable) Description: Friday end, Value: 19:00
+					257 container
+						258 stepper
+						259 stepper
+						260 stepper
+					261 pop up button Show time picker Show time picker
+				262 button Add window
+				263 heading Saturday, Value: 4
+					264 text Saturday
+				265 container
+					266 text 10:00–12:00
+					267 button Remove
+				268 time field (settable) Description: Saturday start, Value: 17:00
+					269 container
+						270 stepper
+						271 stepper
+						272 stepper
+					273 pop up button Show time picker Show time picker
+				274 time field (settable) Description: Saturday end, Value: 19:00
+					275 container
+						276 stepper
+						277 stepper
+						278 stepper
+					279 pop up button Show time picker Show time picker
+				280 button Add window
+			281 heading Fixed commitments & exceptions, Value: 3
+				282 text Fixed commitments & exceptions
+			283 text Classes, meetings, and appointments are subtracted before scheduling.
+			284 button Add commitment, ID: addCommit
+			285 container commitList
+				286 text Class
+				287 text SYSEN 5151 Class
+				288 text Nov 8, 6:00 PM – 7:15 PM
+				289 text Reserved before planning
+				290 button Remove
+				291 text Meeting
+				292 text Project team sync
+				293 text Nov 10, 4:00 PM – 4:45 PM
+				294 text Reserved before planning
+				295 button Remove
+			296 container capacityNote
+				297 text Capacity math:  870m entered − 0m unavailable or committed =  870m schedulable  over the next seven days.
+		298 text Choose a valid start and end time.
+
+The focused UI element is 169 button Add window
