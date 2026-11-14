@@ -1,14 +1,30 @@
 """Measured behavior of StudyFlow (UC.3 Generate Study Plan) for baseline and alternative scenarios.
-30 paired input sets; each set run once per scenario in a fresh browser context."""
-import json, random, sys, statistics as st
+30 paired input sets; each set run once per scenario in a fresh browser context.
+
+Uses the team's ORIGINAL demo file unchanged. The demo's functions are private (inside one
+closure), so at load time this script adds one read-only line in memory, just before the
+closure ends, that exposes existing functions as window.__SF. Nothing is written to disk and
+no planning, ranking, or storage code is changed.
+
+Requires: pip install playwright && playwright install chromium
+Run:  python measure.py studyflow_demo_3.0.html measured_runs.json [N]"""
+import json, os, random, sys
 from datetime import datetime, timedelta
 from playwright.sync_api import sync_playwright
 
-APP = sys.argv[1]
+APP = sys.argv[1]          # original studyflow demo (unmodified)
 OUT = sys.argv[2]
-N = 30
+N = int(sys.argv[3]) if len(sys.argv) > 3 else 30
+
+# ---- runtime test hook (in memory only) ----
+HOOK = ("window.__SF={get state(){return state},user,remaining,slots,getRanked,makePlan,totals,"
+        "renderAll,persist,change,recalculate,showView,KEY,get plan(){return plan}};")
+_src = open(APP, encoding='utf-8').read()
+assert _src.count('})();') == 1, 'expected one closure end in the demo'
+HTML = _src.replace('})();', HOOK + '\n})();')
+URL = 'http://studyflow.test/'
 REPS = 25          # repeated invocations per stage -> per-invocation mean (timer resolution)
-CHROME = '/opt/pw-browsers/chromium-1243/chrome-linux64/chrome'
+CHROME = os.environ.get('SF_CHROME')   # optional path to a specific Chromium; default = Playwright's bundled one
 
 INIT = """
 window.__saves=0;
@@ -68,8 +84,9 @@ $('commitStart').value='{d['cstart']}';$('commitEnd').value='{d['cend']}';}}"""
 def run(browser, d, scen):
     ctx = browser.new_context(viewport={'width': 1440, 'height': 900}, timezone_id='America/New_York')
     ctx.add_init_script(INIT)
+    ctx.route(URL, lambda route: route.fulfill(body=HTML, content_type='text/html'))
     page = ctx.new_page()
-    page.goto('file://' + APP)
+    page.goto(URL)
     page.wait_for_function('window.__SF!==undefined')
     page.wait_for_timeout(450)
     page.evaluate("()=>{const g=document.getElementById('skipGuide');if(g&&document.getElementById('guideModal').classList.contains('open'))g.click()}")
@@ -117,7 +134,7 @@ rng = random.Random(5151)
 sets = [inputs(i, rng) for i in range(N)]
 rows = []
 with sync_playwright() as p:
-    br = p.chromium.launch(executable_path=CHROME, args=['--no-sandbox'])
+    br = p.chromium.launch(executable_path=CHROME, args=['--no-sandbox']) if CHROME else p.chromium.launch()
     for i, d in enumerate(sets):
         for scen in ('baseline', 'alternative'):
             r = run(br, d, scen); r['run'] = i + 1; r['inputs'] = d
